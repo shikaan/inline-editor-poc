@@ -1,0 +1,16 @@
+.control {
+    height: 48px;
+    width: 48px;
+    font-size: 1vmin;
+}
+
+.control .control--save:before {
+    content: '💾️️'
+}
+
+[contenteditable="true"] {
+    background: white;
+    color: black;
+    border: 2px black;
+    padding: 4px;
+}

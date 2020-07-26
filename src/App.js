@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import Article from "./Article"
+import Article from "./Article.jsx"
+import {Github} from "./github/Github"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>LOL</h1>
-      </header>
+      <Github/>
       <Article/>
     </div>
   );

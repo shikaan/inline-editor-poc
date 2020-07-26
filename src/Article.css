@@ -1,4 +1,9 @@
-.Article {
+.article__body {
     max-width: 768px;
     margin: auto;
+}
+
+.article__title {
+    text-align: center;
+    font-size: calc(10px + 2vmin);
 }
