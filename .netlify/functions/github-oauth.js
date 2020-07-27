@@ -4,6 +4,8 @@ const https = require('https')
 exports.handler = function (event, context, callback) {
   const {githubCode} = JSON.parse(event.body)
 
+  console.log(context)
+
   // TODO: refresh these credentials!
   const params = qs.encode({
     'client_id': '6587b38646374a039ebc',
