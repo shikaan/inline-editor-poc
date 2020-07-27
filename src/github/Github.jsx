@@ -5,7 +5,7 @@ import {loadConfig} from "./utils"
 const Config = loadConfig('GITHUB_CLIENT_ID')
 
 const useClickOutside = (ref, callback) => {
-  const wrappedCallback = useCallback(function(e) {
+  const wrappedCallback = useCallback(function (e) {
     if (ref.current.contains(e.target)) {
       return
     }
@@ -48,6 +48,12 @@ export function Github() {
         body: JSON.stringify({githubCode})
       })
         .then(res => res.json())
+        .then(json => fetch('https://api.github.com/user', {
+            headers: new Headers({
+              Authorization: `token ${json.access_token}`
+            })
+          })
+        ).then(res => res.json())
         .then(console.log)
 
       // use token to fetch the user
