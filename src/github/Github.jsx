@@ -36,28 +36,27 @@ export function Github() {
   const dialogRef = createRef()
   const githubCode = useMemo(getGithubCode, [])
   const githubURL = useMemo(getGithubUrl, [])
+  const [user, setUser] = useState(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   useClickOutside(dialogRef, () => setIsDialogOpen(false))
 
   useEffect(() => {
     if (githubCode) {
-
       fetch('.netlify/functions/github-oauth', {
         method: 'POST',
         body: JSON.stringify({githubCode})
       })
         .then(res => res.json())
-        .then(json => fetch('https://api.github.com/user', {
+        .then(json =>
+          fetch('https://api.github.com/user', {
             headers: new Headers({
               Authorization: `token ${json.access_token}`
             })
           })
-        ).then(res => res.json())
-        .then(console.log)
-
-      // use token to fetch the user
-      // make it part of the context
+        )
+        .then(res => res.json())
+        .then(setUser)
     }
   })
 
