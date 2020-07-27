@@ -2,7 +2,7 @@ const qs = require('querystring')
 const https = require('https')
 
 exports.handler = function (event, context, callback) {
-  const {githubCode} = event
+  const {githubCode} = JSON.parse(event.body)
 
   // TODO: refresh these credentials!
   const params = qs.encode({
