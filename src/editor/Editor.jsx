@@ -79,7 +79,7 @@ export function withInlineEditor(WrappedComponent, options) {
 
         // Refetch the entry and try again on version mismatch
         // TODO: this should not happen and should be handled via app events
-        const {entry} = await this._getEntry(this.state.space);
+        const entry = await this._getEntry(this.state.space);
 
         newEntry = await entry.update()
       }
