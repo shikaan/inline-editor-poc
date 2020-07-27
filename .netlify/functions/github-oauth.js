@@ -1,15 +1,17 @@
 const qs = require('querystring')
 const https = require('https')
 
+const config = {
+  clientId: process.env.REACT_APP_GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET
+}
+
 exports.handler = function (event, context, callback) {
   const {githubCode} = JSON.parse(event.body)
 
-  console.log(context)
-
-  // TODO: refresh these credentials!
   const params = qs.encode({
-    'client_id': '6587b38646374a039ebc',
-    'client_secret': '08639050d1227439a6d111880c85673c0df70d28',
+    'client_id': config.clientId,
+    'client_secret': config.clientSecret,
     'code': githubCode
   })
 
