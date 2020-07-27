@@ -65,7 +65,7 @@ export function withInlineEditor(WrappedComponent, options) {
     handleSave = async () => {
       const newRawContent = ReactDOM.findDOMNode(this.ref.current).innerHTML
 
-      this.state.entry.fields[field][locale] = this.state.fieldType === 'richText'
+      this.state.entry.fields[field][locale] = this.state.fieldType === 'Text'
         ? converter.makeMarkdown(newRawContent)
         : newRawContent
       let newEntry
