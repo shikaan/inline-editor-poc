@@ -1,0 +1,25 @@
+.fab {
+    position: fixed;
+    padding: 16px;
+    font-size: 2vmin;
+    border-radius: 40px;
+    border: none;
+    display: block;
+    height: 64px;
+    width: 64px;
+    cursor: pointer;
+}
+
+.fab--login {
+    right: 40px;
+    top: 40px;
+    background: beige;
+}
+
+.dialog {
+    height: 20vh;
+    width: 40vw;
+    text-align: center;
+    box-shadow: 0 0 0 2000px rgba(0,0,0,.6);
+    z-index: 9999999;
+}
