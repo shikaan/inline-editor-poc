@@ -75,6 +75,6 @@
 
     background: var(--gray);
     border: none;
-    border-radius: var(--inner-border-radius);
+    border-radius: 0 0 0 var(--inner-border-radius);
     cursor: pointer;
 }
