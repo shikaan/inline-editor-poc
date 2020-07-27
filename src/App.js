@@ -6,8 +6,9 @@ import {Github} from "./github/Github"
 function App() {
   return (
     <div className="App">
-      <Github/>
-      <Article/>
+      <Github>
+        <Article/>
+      </Github>
     </div>
   );
 }

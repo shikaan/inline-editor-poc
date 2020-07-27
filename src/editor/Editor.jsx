@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import {createClient} from "contentful-management"
 import * as showdown from 'showdown'
 
-import {loadConfig} from "./utils"
+import {loadConfig, getClassName} from "./utils"
 
 import './Editor.css'
 
@@ -14,8 +14,6 @@ const client = createClient({
 })
 
 const converter = new showdown.Converter()
-
-const getClassName = (...conditionalClasses) => conditionalClasses.filter(Boolean).join(' ')
 
 const Control = ({type, onClick, icon}) => {
   const className = getClassName('control', `control--${type}`)
@@ -35,6 +33,10 @@ export function withInlineEditor(WrappedComponent, options) {
       rawHTMLDump: null,
       fieldType: null,
       space: null
+    }
+
+    static defaultProps = {
+      enabled: false
     }
 
     async componentDidMount() {
@@ -92,33 +94,43 @@ export function withInlineEditor(WrappedComponent, options) {
       const markdown = content
       const editorClassName = getClassName('editor', editable ? 'editor--editable' : 'editor--static')
 
-      return (
-        <div className={editorClassName}>
-          {
-            !editable ?
-              <div className="editor__top-row">
-                <Control icon="✏️" type="edit" onClick={this.handleEdit} />
-              </div>
-              : null
-          }
-          <WrappedComponent
-            {...this.props}
-            ref={this.ref}
-            html={converter.makeHtml(markdown)}
-            markdown={markdown}
-            content={content}
-            entry={entry}
-            editable={editable}/>
-          {
-            editable ?
-              <div className="editor__bottom-row">
-                <Control icon="❌️" type="cancel" onClick={this.handleCancel} />
-                <Control icon="💾️️" type="save" onClick={this.handleSave} />
-              </div>
-              : null
-          }
-        </div>
-      )
+      console.log(this.props)
+
+      return this.props.enabled
+        ? (
+          <div className={editorClassName}>
+            {
+              !editable ?
+                <div className="editor__top-row">
+                  <Control icon="✏️" type="edit" onClick={this.handleEdit}/>
+                </div>
+                : null
+            }
+            <WrappedComponent
+              {...this.props}
+              ref={this.ref}
+              html={converter.makeHtml(markdown)}
+              markdown={markdown}
+              content={content}
+              entry={entry}
+              editable={editable}/>
+            {
+              editable ?
+                <div className="editor__bottom-row">
+                  <Control icon="❌️" type="cancel" onClick={this.handleCancel}/>
+                  <Control icon="💾️️" type="save" onClick={this.handleSave}/>
+                </div>
+                : null
+            }
+          </div>
+        )
+        : <WrappedComponent
+          {...this.props}
+          html={converter.makeHtml(markdown)}
+          markdown={markdown}
+          content={content}
+          entry={entry}
+        />
     }
 
     /**

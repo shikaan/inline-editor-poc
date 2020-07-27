@@ -1,6 +1,7 @@
-import React from "react"
+import React, {useContext} from "react"
 import {withInlineEditor} from "./editor"
 import './Article.css'
+import {AuthContext} from "./github"
 
 class Title extends React.Component {
   render() {
@@ -22,15 +23,15 @@ class Body extends React.Component {
 
 const InlineBody = withInlineEditor(Body, {entryId: '31TNnjHlfaGUoMOwU0M2og', field: 'body', locale: 'en-US'})
 
-class Article extends React.Component {
-  render() {
-    return (
-      <article>
-        <InlineTitle/>
-        <InlineBody/>
-      </article>
-    )
-  }
+function Article() {
+  const user = useContext(AuthContext)
+
+  return (
+    <article>
+      <InlineTitle enabled={!!user?.login} />
+      <InlineBody enabled={!!user?.login} />
+    </article>
+  )
 }
 
 export default Article

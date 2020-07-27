@@ -13,3 +13,5 @@ export const loadConfig = (...requiredEnvVariables) => {
     EnvironmentId: process.env.REACT_APP_ENVIRONMENT_ID ?? 'master',
   }
 }
+
+export const getClassName = (...conditionalClasses) => conditionalClasses.filter(Boolean).join(' ')
