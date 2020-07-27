@@ -7,7 +7,7 @@ exports.handler = function (event, context, callback) {
   // TODO: refresh these credentials!
   const params = qs.encode({
     'client_id': '6587b38646374a039ebc',
-    'client_secret': '79c1aa5b06490a64ced31b8a4060f161facf4c77',
+    'client_secret': '08639050d1227439a6d111880c85673c0df70d28',
     'code': githubCode
   })
 
@@ -36,4 +36,7 @@ exports.handler = function (event, context, callback) {
   }).on('error', error => {
     callback(error)
   })
+
+  request.write()
+  request.end()
 }
