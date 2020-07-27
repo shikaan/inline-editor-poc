@@ -45,6 +45,7 @@ const useGithubUser = (githubCode) => {
 
   useEffect(() => {
     if (githubCode) {
+      window.history.replaceState({}, window.document.title, '/')
       fetch('.netlify/functions/github-oauth', {
         method: 'POST',
         body: JSON.stringify({githubCode})
