@@ -59,6 +59,7 @@ const useGithubUser = (githubCode) => {
         )
         .then(res => res.json())
         .then(setUser)
+        .catch(console.error)
     }
   }, [githubCode])
 

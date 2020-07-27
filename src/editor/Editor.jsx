@@ -94,8 +94,6 @@ export function withInlineEditor(WrappedComponent, options) {
       const markdown = content
       const editorClassName = getClassName('editor', editable ? 'editor--editable' : 'editor--static')
 
-      console.log(this.props)
-
       return this.props.enabled
         ? (
           <div className={editorClassName}>
