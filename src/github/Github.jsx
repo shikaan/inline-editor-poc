@@ -2,7 +2,7 @@ import React, {useEffect, useState, createRef, useMemo, useCallback} from "react
 import './GitHub.css'
 import {loadConfig} from "./utils"
 
-const Config = loadConfig('GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET')
+const Config = loadConfig('GITHUB_CLIENT_ID')
 
 const useClickOutside = (ref, callback) => {
   const wrappedCallback = useCallback(function(e) {
@@ -42,7 +42,13 @@ export function Github() {
 
   useEffect(() => {
     if (githubCode) {
-      console.log('Got GithubCode', githubCode)
+
+      fetch('.netlify/functions/github-oauth', {
+        method: 'POST',
+        body: JSON.stringify({githubCode})
+      })
+        .then(res => res.json())
+        .then(console.log)
 
       // use token to fetch the user
       // make it part of the context

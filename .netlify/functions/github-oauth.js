@@ -21,8 +21,6 @@ exports.handler = function (event, context, callback) {
   }, (res) => {
     let data = '';
 
-    console.log('Status Code:', res.statusCode);
-
     res.on('data', (chunk) => {
       data += chunk;
     });
