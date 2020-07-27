@@ -1,16 +1,16 @@
-import React, {useEffect, useState, createRef, useMemo} from "react";
+import React, {useEffect, useState, createRef, useMemo, useCallback} from "react";
 import './GitHub.css'
 import {loadConfig} from "./utils"
 
 const Config = loadConfig('GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET')
 
 const useClickOutside = (ref, callback) => {
-  function wrappedCallback(e) {
+  const wrappedCallback = useCallback(function(e) {
     if (ref.current.contains(e.target)) {
       return
     }
     callback(e)
-  }
+  }, [ref, callback])
 
   useEffect(() => {
     document.addEventListener("mousedown", wrappedCallback)
