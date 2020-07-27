@@ -18,7 +18,7 @@ const useClickOutside = (ref, callback) => {
     return () => {
       document.removeEventListener("mousedown", wrappedCallback)
     }
-  }, [ref])
+  }, [ref, wrappedCallback])
 }
 const getGithubCode = () => {
   return new URLSearchParams(window.location.search).get('code')
@@ -51,7 +51,9 @@ export function Github() {
 
   return (
     <>
-      <button onClick={() => setIsDialogOpen(true)} className="fab fab--login">🔑️</button>
+      <button onClick={() => setIsDialogOpen(true)} className="fab fab--login">
+        <span role="img" aria-label="login">🔑️</span>
+      </button>
       <dialog ref={dialogRef} className="dialog" open={isDialogOpen}>
         <h1>Github Login</h1>
         <p>
