@@ -37,6 +37,6 @@ exports.handler = function (event, context, callback) {
     callback(error)
   })
 
-  request.write()
+  request.write('')
   request.end()
 }
